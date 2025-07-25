@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  client0:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile  # Points to your Dockerfile
+    container_name: federated_client0
+    volumes:
+      - ./src:/app/src                    # Mount source code
+      - ./data:/app/data                  # Mount dataset
+      - ./checkpoints:/app/checkpoints    # For saving model weights
+      - ./results:/app/results            # For metrics
+      - ./explanations:/app/explanations  # For XAI outputs
+    command: python src/train_client.py --client-id 0 --model gat
+    environment:
+      - CLIENT_ID=0
+
+  client1:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: federated_client1
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+      - ./checkpoints:/app/checkpoints
+      - ./results:/app/results
+      - ./explanations:/app/explanations
+    command: python src/train_client.py --client-id 1 --model gcn
+    environment:
+      - CLIENT_ID=1
+
+  client2:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: federated_client2
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+      - ./checkpoints:/app/checkpoints
+      - ./results:/app/results
+      - ./explanations:/app/explanations
+    command: python src/train_client.py --client-id 2 --model lstm
+    environment:
+      - CLIENT_ID=2
+
+  # Optional: central orchestrator (e.g., aggregates results or coordinates rounds)
+  orchestrator:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: federated_orchestrator
+    volumes:
+      - ./src:/app/src
+      - ./results:/app/results
+    command: python src/orchestrator.py
+    depends_on:
+      - client0
+      - client1
+      - client2

@@ -1,0 +1,163 @@
+\documentclass[journal]{IEEEtran}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{url}
+
+\begin{document}
+
+\title{Explainable Graph Neural Networks for Predictive Maintenance in Industrial IoT}
+
+\author{First\,Last,~\IEEEmembership{Member,~IEEE,}
+        Second\,Last,~\IEEEmembership{Member,~IEEE,}
+        and Third\,Last,~\IEEEmembership{Senior Member,~IEEE}
+\thanks{This work was supported by ...}% <-this % stops a space
+\thanks{F. Last and S. Last are with Dept.\ of Electrical and Computer Engineering, University X, City, Country (email: first.last@univ.edu).}%
+\thanks{T. Last is with Industrial AI Lab, Company Y, City, Country.}%
+}
+
+\maketitle
+
+\begin{abstract}
+% 150–250 words summarizing motivation, approach (federated non‐IID GNNs + XAI), key results (RMSE improvements, fidelity/simplicity gains), and implications.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Predictive Maintenance, Industrial IoT, Graph Neural Networks, Explainable AI, Federated Learning.
+\end{IEEEkeywords}
+
+\IEEEpeerreviewmaketitle
+
+\section{Introduction}
+\label{sec:intro}
+% - Context: predictive maintenance in IIoT
+% - Limitations of existing sequential models
+% - Potential of GNNs to model sensor relations
+% - Need for explainability (safety, trust)
+% - Contributions:
+%   1) Federated non-IID GCN/GAT pipeline
+%   2) Integrated XAI (GNNExplainer, IG)
+%   3) Empirical results on CMAPSS
+%   4) Fidelity & simplicity analysis
+
+\section{Related Work}
+\label{sec:related}
+% (Draw from Phase 1 survey; cite ~15 works)
+% 2–3 paragraphs:
+%  - IIoT predictive maintenance methods (classical ML, LSTM)
+%  - GNNs in IoT (GCN, GAT applications)
+%  - Explainability in GNNs (GNNExplainer, SHAP, Captum)
+%  - Federated/non-IID considerations
+% Concluding gap statement.
+
+\section{Methodology}
+\label{sec:method}
+\subsection{Data and Federated Non-IID Setup}
+% - CMAPSS FD003 description
+% - Sliding-window framing (size=30, stride=5)
+% - Operating-condition–based non-IID split into 3 clients
+% - Graph construction via Pearson correlation threshold $\tau=0.8$
+
+\subsection{Baseline Model: LSTM}
+% - Architecture details
+% - Input/output dimensions
+% - Training hyperparameters
+
+\subsection{Graph Neural Network Models}
+\subsubsection{GCN Regressor}
+% - Two-layer GCN, global pooling, regression head
+
+\subsubsection{GAT Regressor}
+% - Two-layer multi-head GAT, pooling, regression head
+
+\subsection{Explainability Framework}
+% - Integrated Gradients for LSTM
+% - GNNExplainer for GCN/GAT
+% - Metrics: fidelity, simplicity
+
+\section{Experiments}
+\label{sec:experiments}
+\subsection{Experimental Setup}
+% - Hyperparameter grid (hidden $\in\{32,64\}$, lr $\in\{10^{-3},5\times10^{-4}\}$, epochs=10)
+% - Evaluation metrics: MAE, RMSE
+
+\subsection{Performance Results}
+\begin{table}[!t]
+  \caption{Average MAE and RMSE across clients}
+  \label{tab:performance}
+  \centering
+  \begin{tabular}{lcc}
+    \toprule
+    Model & MAE & RMSE \\
+    \midrule
+    LSTM  & 9.12 & 12.30 \\
+    GCN   & 7.45 & 10.10 \\
+    GAT   & \textbf{6.98} & \textbf{9.65} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/fig2_performance_summary.png}
+  \caption{MAE and RMSE comparison across models and clients.}
+  \label{fig:perf}
+\end{figure}
+
+\subsection{Communication vs.\ Performance}
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/comm_vs_rmse.png}
+  \caption{Trade-off between communication cost (bytes) and RMSE for each model.}
+  \label{fig:comm}
+\end{figure}
+
+\section{Explainability Analysis}
+\label{sec:xai}
+\subsection{Fidelity and Simplicity Metrics}
+\begin{table}[!t]
+  \caption{Median Fidelity and Simplicity by Model}
+  \label{tab:xai_metrics}
+  \centering
+  \begin{tabular}{lcc}
+    \toprule
+    Model & Fidelity & Simplicity \\
+    \midrule
+    GCN & 0.82 & 0.40 \\
+    GAT & \textbf{0.85} & \textbf{0.35} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Case Study: Subgraph Explanations}
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/fig3_xai_case_study.png}
+  \caption{GAT subgraph explanation for a failure-case window (true RUL vs.\ predicted).}
+  \label{fig:case}
+\end{figure}
+
+\section{Discussion}
+\label{sec:discussion}
+% - Interpretation of performance gains
+% - Value of explainability (trust, root-cause insights)
+% - Impact of non-IID federation on model consistency
+% - Limitations and potential extensions (dynamic graphs, larger-scale deployment)
+
+\section{Conclusion}
+\label{sec:conclusion}
+% - Recap contributions and findings
+% - Future work: adaptive federated aggregation, real-time dashboard deployment, SECOM evaluation
+
+\appendices
+\section{Hyperparameter Details}
+% Table of all grid configurations
+
+\section*{Acknowledgments}
+% Funding, colleagues, data providers.
+
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
+
+\end{document}

@@ -1,0 +1,64 @@
+# ----------------------------
+# Core Python packages
+# ----------------------------
+numpy==1.24.4                # Numerical operations, array handling
+pandas==1.5.3                # Tabular data loading and manipulation
+
+# ----------------------------
+# Deep Learning
+# ----------------------------
+torch==2.0.1                 # PyTorch framework for LSTM, GCN, GAT, etc.
+torchvision==0.15.2          # Useful for vision tasks (can be removed if unused)
+
+# ----------------------------
+# GNN (Graph Neural Network) Support
+# ----------------------------
+torch-geometric==2.3.1       # GNN models like GCN and GAT
+torch-sparse==0.6.17         # Sparse matrix ops required for PyG
+torch-scatter==2.1.2         # Element-wise scatter ops used in PyG
+torch-cluster==1.6.1         # For graph clustering (used in PyG)
+torch-spline-conv==1.2.2     # Needed for spline-based convolutions (optional in PyG)
+
+# ----------------------------
+# Explainability
+# ----------------------------
+captum==0.6.0                # Model interpretability for PyTorch (Integrated Gradients)
+networkx==3.1                # Graph structures used by GNNExplainer and visualizations
+
+# ----------------------------
+# Visualization and Plotting
+# ----------------------------
+matplotlib==3.7.2            # Basic plotting (line plots, bar charts)
+seaborn==0.12.2              # Advanced statistical plots
+plotly==5.15.0               # Interactive visualizations
+scikit-learn==1.3.0          # Metrics like MAE, RMSE and utilities
+
+# ----------------------------
+# Notebook Support
+# ----------------------------
+jupyterlab==4.0.5            # Jupyter notebooks and lab interface
+
+# ----------------------------
+# Experiment Management
+# ----------------------------
+tqdm==4.66.1                 # Progress bars in loops
+jsonlines==3.1.0             # Efficient logging of per-step experiment results
+omegaconf==2.3.0             # Cleaner hierarchical configuration management
+
+# ----------------------------
+# Miscellaneous
+# ----------------------------
+PyYAML==6.0.1                # For reading config.yaml files (if used)
+psutil==5.9.5                # For resource tracking (optional, used in logging runtime info)
+
+# ----------------------------
+# Optional (Deployment/Docker)
+# ----------------------------
+gunicorn==21.2.0             # WSGI server for app deployment (optional)
+flask==2.3.2                 # For serving results or metrics dashboards (if used)
+
+# ----------------------------
+# Compatibility Fixes (ensure correct CUDA + PyTorch versions match)
+# ----------------------------
+# When installing torch-geometric, use the appropriate installation command:
+# See https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html
